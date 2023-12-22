@@ -1,6 +1,7 @@
 /*
  * Feito por Estevao Augusto da Fonseca Santos
  * Criado em 19/12/2023
+ * Ultima modificação: 22/12/2023
  */
 
 
@@ -12,7 +13,7 @@
 
 using namespace std;
 
-const int divisor = 10;
+int divisor = 10;
 
 unsigned gerarNumeros(){ //ira retornar valores de 0 a ate divisor-1
 	return rand()%divisor;
@@ -20,7 +21,7 @@ unsigned gerarNumeros(){ //ira retornar valores de 0 a ate divisor-1
 
 void verificarValor(int &resp){ //checara se o valor eh de fato um inteiro
 	while (cin.fail() || cin.peek() != '\n') {
-		cout << "Entrada inválida. Digite um número inteiro." << endl;
+		cout << "Entrada invalida. Digite um numero inteiro." << endl;
 		cin.clear();  // Limpa o estado de erro
 		cin.ignore(numeric_limits<streamsize>::max(), '\n');  // Descarta a entrada inválida
 		cout << "Sua resposta: ";
@@ -28,7 +29,7 @@ void verificarValor(int &resp){ //checara se o valor eh de fato um inteiro
    }
 }
 
-void iniciarJogo(){
+void iniciarJogo(){// o jogo sera iniciado aqui
 	
 	int questao = 1;
 	int vidas = 3;
@@ -65,6 +66,39 @@ void iniciarJogo(){
 	
 }
 
+void definirDificuldade(){// define-se a dificuldade
+	char opcao;
+	bool saida = false;
+	
+	do{
+		cout << "---------Dificuldade do jogo---------" << endl << endl;
+		cout << "0 - Sair" << endl;
+		cout << "1 - Facil" << endl; // 0 a ate 10
+		cout << "2 - Intermediario" << endl; // 0 a ate 25
+		cout << "3 - Dificil" << endl << endl; // 0 a ate 50
+		cin >> opcao;
+		
+		switch(opcao){
+			case '0':
+				saida = true;
+				break;
+			case '1':
+				divisor = 11;
+				iniciarJogo();
+				break;
+			case '2':
+				divisor = 26;
+				iniciarJogo();
+				break;
+			case '3':
+				divisor = 51;
+				iniciarJogo();
+				break;
+			default:
+				cout << "Opcao inexistente" << endl;
+		}
+	}while(!saida);
+}
 
 int main(){
 	char opcao;
@@ -87,7 +121,7 @@ int main(){
 			}
 			case 'i':{
 				cout << endl;
-				iniciarJogo();
+				definirDificuldade();
 				break;
 			}
 			default:{
